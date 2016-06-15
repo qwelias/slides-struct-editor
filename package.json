@@ -1,0 +1,20 @@
+{
+  "name": "slides-struct-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+      "buildScss": "node_modules/.bin/node-sass -r public/scss/ --output-style compressed -o public/css/",
+      "watchScss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwemaze/slides-struct-editor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qwemaze/slides-struct-editor/issues"
+  },
+  "homepage": "https://github.com/qwemaze/slides-struct-editor#readme"
+}
