@@ -1,4 +1,4 @@
-(function(){
+(function(ctx){
 	"use strict";
 
 	function SObject( data, model ) {
@@ -29,5 +29,5 @@
 		return Server.save( '/api/' + this.model, this.toJS() );
 	};
 
-	window.SObject = SObject;
-})();
+	ctx.SObject = SObject;
+})(window);
