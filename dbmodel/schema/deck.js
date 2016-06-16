@@ -1,3 +1,5 @@
+"use strict";
+
 const defaultRevealConfigSchema = require( '../extra/revealCfg' );
 
 const fragment = {
@@ -20,9 +22,6 @@ const slide = {
 	fragments: [fragment],
 	title: {
 		type: "String"
-	},
-	content: {
-        type: "String"
 	}
 }
 

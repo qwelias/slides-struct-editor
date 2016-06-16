@@ -82,17 +82,17 @@ module.exports = {
 		},
 		transition: {
 			default: "default",
-			type: "String,"
+			type: "String",
 			enum: [ "none", "fade", "slide", "convex", "concave", "zoom", "default" ]
 		},
 		transitionSpeed: {
 			default: "default",
-			type: "String,"
+			type: "String",
 			enum: [ "default", "fast", "slow" ]
 		},
 		backgroundTransition: {
 			default: "default",
-			type: "String,"
+			type: "String",
 			enum: [ "none", "fade", "slide", "convex", "concave", "zoom", "default" ]
 		},
 		viewDistance: {
