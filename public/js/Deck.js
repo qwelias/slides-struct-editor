@@ -3,6 +3,7 @@
 
 	function Deck( data ) {
 		if ( !( this instanceof Deck ) ) return new Deck( data );
+		this.activeSlideI = ko.observable(0);
 		SObject.call( this, data || Deck.default, Deck.modelname );
 	};
 
@@ -12,11 +13,11 @@
 			return {
 				reveal: {
 					config: {},
-					init: {}
+					init: {},
+					theme: ''
 				},
 				title: '',
-				theme: '',
-				slides: []
+				slides: [ctx.Slide()]
 			};
 		}
 	} );
@@ -28,6 +29,11 @@
 
 	Deck.prototype.addSlide = function addSlide( data ) {
 		this.data.slides.push( ctx.Slide( data ) );
+	};
+
+	Deck.prototype.getSlide = function getSlide( i ) {
+		if(i === null || i === undefined) i = this.activeSlideI();
+		return this.data.slides()[i];
 	};
 
 	Deck.prototype.removeSlide = function removeSlide( i ) {

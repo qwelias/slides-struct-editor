@@ -14,7 +14,7 @@
 					"data-autoslide": '1'
 				},
 				title: '',
-				content: ''
+				content: {}
 			};
 		}
 	} );

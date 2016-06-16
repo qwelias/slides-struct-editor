@@ -10,8 +10,21 @@ const fragment = {
 		type: "String"
 	},
 	content: {
-		type: "String",
-		required: true
+		document:{
+			type: "String"
+		},
+		year:{
+			type: "String"
+		},
+		period:{
+			type: "String"
+		},
+		report:{
+			type: "String"
+		},
+		mode:{
+			type: "String"
+		}
 	}
 }
 
@@ -33,11 +46,6 @@ module.exports = {
 	},
 	schema: {
 		reveal: defaultRevealConfigSchema,
-		theme: {
-			type: "String",
-			enum: [ "black", "white", "league", "beige", "sky", "night", "serif", "simple", "solarized" ],
-			default: "black"
-		},
 		title: {
 			type: "String",
 			required: true,

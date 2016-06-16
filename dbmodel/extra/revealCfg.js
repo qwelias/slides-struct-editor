@@ -144,5 +144,10 @@ module.exports = {
 			default: 1.5,
 			type: Number
 		}
+	},
+	theme: {
+		type: "String",
+		enum: [ "black", "white", "league", "beige", "sky", "night", "serif", "simple", "solarized" ],
+		default: "black"
 	}
 }

@@ -27,7 +27,36 @@
     </head>
 
     <body>
-
+        <div data-bind="with: _vm.deck" class="deck">
+            <!-- ko alias: 'deck' -->
+            <div class="deck-head">
+                <input type="text" data-bind="value: deck.data.title">
+            </div>
+            <div class="deck-config" data-bind="with: deck.data.reveal">
+                <!-- TODO -->
+            </div>
+            <div class="deck-content">
+                <div class="deck-slides">
+                    <ul data-bind="foreach: { data: deck.data.slides, as: 'slide' }">
+                        <!-- TODO -->
+                    </ul>
+                    <button><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+                <div class="slide" data-bind="with: deck.getSlide.bind(deck, null)">
+                    <!-- ko alias: 'slide' -->
+                    <div class="slide-config">
+                        <!-- TODO -->
+                    </div>
+                    <div class="slide-frame">
+                        <div class="slide-content" data-bind="foreach:{ data: slide.data.fragments, as: 'fragment' }">
+                            <!-- TODO -->
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
     </body>
 
     <script src="js/Slide.js"></script>

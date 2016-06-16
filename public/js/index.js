@@ -1,11 +1,13 @@
-( function () {
+( function (ctx) {
 
-	Promise.all( window._vm.init ).then( function () {
+	Promise.all( ctx._vm.init ).then( function () {
 		console.log( "INITED" );
 	} ).catch( function ( e ) {
 		console.log( "INIT ERR:", e );
 	} );
 
-	window.ko.applyBindings( window._vm );
+	ctx._vm.deck = ctx.Deck();
 
-} )();
+	ctx.ko.applyBindings( ctx._vm );
+
+} )(window);
