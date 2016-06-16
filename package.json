@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-      "buildScss": "node_modules/.bin/node-sass -r public/scss/ --output-style compressed -o public/css/",
-      "watchScss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/"
+    "buildScss": "node_modules/.bin/node-sass -r public/scss/ --output-style compressed -o public/css/",
+    "watchScss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/qwemaze/slides-struct-editor/issues"
   },
-  "homepage": "https://github.com/qwemaze/slides-struct-editor#readme"
+  "homepage": "https://github.com/qwemaze/slides-struct-editor#readme",
+  "dependencies": {
+    "body-parser": "1.15.1",
+    "connect-mongo": "1.2.0",
+    "debug": "2.2.0",
+    "express": "4.13.4",
+    "express-session": "1.13.0",
+    "mongoose": "4.5.0",
+    "mongoose-createdmodified": "0.0.2"
+  }
 }

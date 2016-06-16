@@ -1,3 +1,5 @@
+"use strict";
+
 const mongoose = require( "mongoose" );
 const express = require( "express" );
 const requireAll = require( "../requireAll" );
@@ -7,8 +9,8 @@ const plugins = {
 	createdmodified: require('mongoose-createdmodified').createdModifiedPlugin
 };
 
-const models = requireAll( "./model/schema" );
-const extenders = requireAll( "./model/extender" );
+const models = requireAll( "./dbmodel/schema" );
+const extenders = requireAll( "./dbmodel/extender" );
 
 mongoose.Promise = global.Promise;
 

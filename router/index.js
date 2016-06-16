@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require( 'express' );
 const ext = require( '../dbmodel' );
 const rest = require( '../lib/rest' );

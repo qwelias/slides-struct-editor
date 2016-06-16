@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require( 'express' );
 const mongoose = require( "mongoose" );
 const session = require( 'express-session' );
@@ -41,7 +43,7 @@ app.use( ( req, res, next ) => {
 
 app.use( '/api', require( './router' ) );
 
-app.use( '/editor*', ( req, res ) => res.sendFile( Path.resolve( config.root, 'public', 'editor.html' ) ) );
+// app.use( '/', ( req, res ) => res.sendFile( Path.resolve( config.root, 'public', 'index.html' ) ) );
 
 http.listen( config.PORT, () => {
 	Log( 'listening on ', config.PORT );
