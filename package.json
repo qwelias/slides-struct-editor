@@ -25,5 +25,8 @@
     "express-session": "1.13.0",
     "mongoose": "4.5.0",
     "mongoose-createdmodified": "0.0.2"
+  },
+  "devDependencies": {
+    "node-sass": "3.7.0"
   }
 }

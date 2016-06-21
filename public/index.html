@@ -9,7 +9,6 @@
                 ctx._vm = {
                     init: []
                 };
-
             })(window);
 
         </script>
@@ -17,6 +16,9 @@
             href="css/fa.css">
         <link rel="stylesheet"
             href="css/style.css">
+        <!--[if IE]>
+            <script src="lib/flexibility.js"></script>
+        <![endif]-->
         <script src="lib/promise.js"></script>
         <script src="lib/jq.js"></script>
         <script src="lib/jq-ajax-promise.js"></script>
@@ -27,35 +29,177 @@
     </head>
 
     <body>
-        <div data-bind="with: _vm.deck" class="deck">
+        <div data-bind="with: _vm.deck"
+            class="deck">
             <!-- ko alias: 'deck' -->
             <div class="deck-head">
-                <input type="text" data-bind="value: deck.data.title">
+                <input type="text"
+                    placeholder="deck title"
+                    data-bind="value: deck.data.title">
             </div>
-            <div class="deck-config" data-bind="with: deck.data.reveal">
-                <!-- TODO -->
+            <div class="config-bar"
+                data-bind="with: deck.data.reveal">
+                <label>
+                    Theme
+                    <select data-bind="options: Deck.options.theme, value: theme"></select>
+                </label>
+                <label>
+                    Transition
+                    <select data-bind="options: Deck.options.transition, value: config.transition"></select>
+                </label>
+                <label>
+                    Loop
+                    <input type="checkbox"
+                        data-bind="checked: config.loop">
+                </label>
+                <label>
+                    Controls
+                    <input type="checkbox"
+                        data-bind="checked: config.controls">
+                </label>
+                <label>
+                    Auto-slide
+                    <input type="number"
+                        min="0"
+                        data-bind="value: config.autoSlide"> ms
+                </label>
             </div>
             <div class="deck-content">
+                <div class="deck-slides spacer"></div>
                 <div class="deck-slides">
                     <ul data-bind="foreach: { data: deck.data.slides, as: 'slide' }">
-                        <!-- TODO -->
+                        <li>
+                            <button class="slide-remove"
+                                data-bind="
+                                visible: $index() > 0,
+                                click: deck.removeSlide.bind(deck, $index())">
+                                <i class="fa fa-times"
+                                    aria-hidden="true"></i>
+                            </button>
+                            <button class="slide-mvup"
+                                data-bind="
+                                visible: $index() > 0,
+                                click: deck.moveSlide.bind(deck, $index(), true)">
+                                <i class="fa fa-chevron-up"
+                                    aria-hidden="true"></i>
+                            </button>
+                            <button class="slide-mvdown"
+                                data-bind="
+                                visible: $index() < deck.data.slides().length - 1,
+                                click: deck.moveSlide.bind(deck, $index(), false)">
+                                <i class="fa fa-chevron-down"
+                                    aria-hidden="true"></i>
+                            </button>
+                            <button class="slide-number"
+                                data-bind="text: $index() + 1">
+                            </button>
+                            <div class="slide-view min"
+                                data-bind="click: deck.activeSlideI.bind(null, $index())">
+                                <span data-bind="text: slide.data.title"></span>
+                                <div data-bind="
+                                    attr:{ class: 'slide-fragments ' + slide.data.attr.class() },
+                                    foreach: {
+                                        data: slide.data.fragments,
+                                        as: 'fragment'
+                                    }
+                                ">
+                                    <div data-bind="attr:{style:fragment.getBGStyle()}">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
-                    <button><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    <button data-bind="click: deck.addSlide.bind(deck, null)">
+                        <i class="fa fa-plus"
+                            aria-hidden="true"></i>
+                    </button>
                 </div>
-                <div class="slide" data-bind="with: deck.getSlide.bind(deck, null)">
+                <div class="slide"
+                    data-bind="with: deck.getSlide()">
                     <!-- ko alias: 'slide' -->
-                    <div class="slide-config">
-                        <!-- TODO -->
+                    <div class="config-bar">
+                        <label>
+                            Transition
+                            <select data-bind="options: Deck.options.transition, value: slide.data.attr['data-transition']"></select>
+                        </label>
+                        <label>
+                            Auto-slide
+                            <input type="number"
+                                min="0"
+                                data-bind="value: slide.data.attr['data-autoslide']"> ms
+                        </label>
+                        <label>
+                            Layout
+                            <select data-bind="options: Object.keys(Slide.layouts), value: slide.data.attr.class"></select>
+                        </label>
                     </div>
                     <div class="slide-frame">
-                        <div class="slide-content" data-bind="foreach:{ data: slide.data.fragments, as: 'fragment' }">
-                            <!-- TODO -->
+                        <div class="slide-view">
+                            <span>
+                                <input type="text"
+                                    placeholder="slide title"
+                                    data-bind="value: slide.data.title">
+                            </span>
+                            <div data-bind="
+                                attr:{ class: 'slide-fragments ' + slide.data.attr.class() },
+                                foreach: {
+                                    data: slide.data.fragments,
+                                    as: 'fragment'
+                                }">
+                                <div data-bind="attr:{style:fragment.getBGStyle()}">
+                                    <div class="fragment-overlay"
+                                        data-bind="click: slide.openConfig.bind(slide, fragment)">
+                                        <i class="fa fa-cog"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /ko -->
                 </div>
             </div>
             <!-- /ko -->
+        </div>
+        <div id="fragment-config"
+            class="popup"
+            style="display:none;"
+            onclick="hidePopup(arguments[0])"
+            data-bind="with: _vm.deck.getSlide() && _vm.deck.getSlide().activeFragment">
+            <div>
+                <label>
+                    <div>
+                        Document
+                    </div>
+                    <input type="text"
+                        data-bind="value: data.content.document">
+                </label>
+                <label>
+                    <div>Year</div>
+                    <input type="text"
+                        data-bind="value: data.content.year">
+                </label>
+                <label>
+                    <div>Period</div>
+                    <input type="text"
+                        data-bind="value: data.content.period">
+                </label>
+                <label>
+                    <div>Report</div>
+                    <input type="text"
+                        data-bind="value: data.content.report">
+                </label>
+                <label>
+                    <div>Mode</div>
+                    <input type="text"
+                        data-bind="value: data.content.mode">
+                </label>
+                <label>
+                    <div>Src</div>
+                    <input type="text"
+                        data-bind="value: data.content.src">
+                </label>
+            </div>
         </div>
     </body>
 

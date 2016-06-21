@@ -1,5 +1,12 @@
-(function(ctx){
+( function ( ctx ) {
 	"use strict";
+
+	ctx.typeOf = function typeOf( v ) {
+		if ( Array.isArray( v ) ) return 'array';
+		if ( v === null ) return 'null';
+		if ( v.constructor && v.constructor.name !== 'Object' ) return v.constructor.name;
+		return typeof v;
+	};
 
 	function SObject( data, model ) {
 		if ( !( this instanceof SObject ) ) return new SObject( data, model );
@@ -15,8 +22,10 @@
 	SObject.fromJS = function fromJS( o ) {
 		var out = {};
 		Object.keys( o ).map( function ( k ) {
-			if ( Array.isArray( o[ k ] ) ) out[ k ] = ko.observableArray( o[ k ] );
-			else out[ k ] = ko.observable( o[ k ] );
+			if ( typeOf( o[ k ] ) === 'object' ) out[ k ] = fromJS( o[ k ] );
+			else if ( typeOf( o[ k ] ) === 'array' ) out[ k ] = ko.observableArray( o[ k ] );
+			else if ( typeOf( o[ k ] ) === 'function' ) out[ k ] = o[ k ];
+			else return out[ k ] = ko.observable( o[ k ] );
 		} );
 		return out;
 	};
@@ -30,4 +39,4 @@
 	};
 
 	ctx.SObject = SObject;
-})(window);
+} )( window );

@@ -10,19 +10,22 @@ const fragment = {
 		type: "String"
 	},
 	content: {
-		document:{
+		document: {
 			type: "String"
 		},
-		year:{
+		year: {
 			type: "String"
 		},
-		period:{
+		period: {
 			type: "String"
 		},
-		report:{
+		report: {
 			type: "String"
 		},
-		mode:{
+		mode: {
+			type: "String"
+		},
+		src: {
 			type: "String"
 		}
 	}
@@ -32,7 +35,7 @@ const slide = {
 	attr: {
 		type: "Mixed"
 	},
-	fragments: [fragment],
+	fragments: [ fragment ],
 	title: {
 		type: "String"
 	}
@@ -52,6 +55,6 @@ module.exports = {
 			unique: true,
 			index: true
 		},
-		slides: [slide]
+		slides: [ slide ]
 	}
 }

@@ -3,15 +3,24 @@
 
 	function Slide( data ) {
 		if ( !( this instanceof Slide ) ) return new Slide( data );
+
+		this.activeFragment = ko.observable();
+
 		SObject.call( this, data || Slide.default );
+
+		this.data.attr.class.subscribe( Slide.prototype.setLayout.bind( this ) );
 	};
 
 	Object.defineProperty( Slide, 'default', {
 		enumerable: true,
 		get: function () {
 			return {
-				attr: {},
-				fragments: [],
+				attr: {
+					class: 'single',
+					"data-autoslide": '0',
+					"data-transition": 'default'
+				},
+				fragments: [ ctx.Fragment() ],
 				title: ''
 			};
 		}
@@ -45,13 +54,17 @@
 	};
 
 	Slide.prototype.setLayout = function setLayout( name ) {
-		var attr = this.data.attr();
-		var fragments;
-		if ( !Slide.layouts[ name ] ) return;
-		attr.class = name;
-		fragments = new Array( Slide.layouts[ name ] ).fill( ctx.Fragment() );
-		this.data.attr( attr );
+		var old = this.data.fragments();
+		var fragments = new Array( Slide.layouts[ name ] || 1 ).fill( 0 ).map( function (f, i) {
+			return old[i] || ctx.Fragment();
+		} );
+		console.log( this )
 		this.data.fragments( fragments );
+	};
+
+	Slide.prototype.openConfig = function openConfig( fragment ) {
+		this.activeFragment( fragment );
+		ctx.$('#fragment-config').show();
 	};
 
 	delete Slide.prototype.save;

@@ -1,0 +1,72 @@
+$bGreyColor: rgb(180, 180, 180);
+$bgGreyColor: rgb(245, 245, 245);
+
+html {
+    width: 100%;
+    height: 100%;
+
+    * {
+        position: relative;
+        box-sizing: border-box;
+    }
+}
+
+body {
+    font-family: Roboto, Ubuntu, sans-serif;
+    font-size: 14px;
+    padding: 1em;
+    margin: 0;
+
+    a {
+        text-decoration: none;
+    }
+
+    input {
+        vertical-align: middle;
+
+        &[type="number"],
+        &[type="text"] {
+            text-align: center;
+            outline: none;
+            border: none;
+            border-bottom: dashed 1px $bGreyColor;
+        }
+    }
+}
+@import '_view.scss';
+@import '_layouts.scss';
+
+.button,
+button {
+    background-color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    outline: none;
+    padding: 0.5em 0.8em;
+    cursor: pointer;
+    border: solid 1px $bGreyColor;
+    border-radius: 5px;
+    color: inherit;
+    text-decoration: none;
+
+    > i {
+        vertical-align: middle;
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+        color: rgb(100,100,100);
+
+        &:hover {
+            background-color: inherit;
+        }
+    }
+
+    &:hover {
+        background-color: $bgGreyColor;
+    }
+
+    &.active {
+        background-color: rgb(238, 238, 238);
+    }
+}
