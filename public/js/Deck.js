@@ -6,7 +6,7 @@
 
 		this.activeSlideI = ko.observable( 0 );
 
-		SObject.call( this, data || Deck.default, Deck.modelname );
+		ctx.SObject.call( this, data || Deck.default, Deck.modelname );
 	};
 
 	Object.defineProperty( Deck, 'default', {
@@ -41,7 +41,7 @@
 
 	Deck.modelname = 'deck';
 
-	Deck.prototype = Object.create( SObject.prototype, {} );
+	Deck.prototype = Object.create( ctx.SObject.prototype, {} );
 	Deck.prototype.constructor = Deck;
 
 	Deck.prototype.addSlide = function addSlide( data ) {
@@ -67,7 +67,7 @@
 	};
 
 	Deck.prototype.toJS = function toJS() {
-		var r = SObject.prototype.toJS.call( this );
+		var r = ctx.SObject.prototype.toJS.call( this );
 		r.slides = r.slides.map( function ( s ) {
 			return s.toJS();
 		} );
@@ -75,13 +75,31 @@
 	};
 
 	Deck.prototype.save = function save() {
-		return SObject.prototype.save.call( this ).then( function () {
+		return ctx.SObject.prototype.save.call( this ).then( function () {
 			console.log( 'saved' );
 		}.bind( this ) ).catch( function ( e ) {
 			console.log( e.stack || e );
 		} );
 	};
 
+	Deck.load = function load( id ) {
+		id = "57695aea4c09532129cae5e0";
+		return ctx.Server.get( '/api/' + Deck.modelname + "/" + id ).then( function ( data ) {
+			var deck = data.result;
+			deck.slides = deck.slides.map( function ( s ) {
+				s.fragments = s.fragments.map( function ( f ) {
+					return ctx.Fragment( f );
+				} );
+				return ctx.Slide( s );
+			} );
+			return Deck( deck );
+		} );
+	};
+
 	ctx.Deck = Deck;
+
+	ctx._vm.init.push( Deck.load().then( function ( deck ) {
+		ctx._vm.deck = deck;
+	} ) );
 
 } )( window );

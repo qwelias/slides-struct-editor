@@ -58,7 +58,6 @@
 		var fragments = new Array( Slide.layouts[ name ] || 1 ).fill( 0 ).map( function (f, i) {
 			return old[i] || ctx.Fragment();
 		} );
-		console.log( this )
 		this.data.fragments( fragments );
 	};
 
