@@ -1,10 +1,10 @@
 "use strict";
 
-const mongoose = require( 'mongoose' );
-const Log = require('debug')('app:model:extender:deck');
+const deckBuilder = require( '../../lib/reveal' );
+const Log = require( 'debug' )( 'app:model:extender:deck' );
 
 const useSchema = ( schema ) => {
-
+	schema.post( 'save', ( doc ) => deckBuilder( doc ).catch( ( e ) => Log( e.stack || e ) ) );
 };
 
 const useModel = ( model ) => {
