@@ -150,6 +150,35 @@
     }
 }
 
+.fragment-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: transparent;
+    -js-display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: transparentize($bgGreyColor, 0.5);
+        cursor: pointer;
+
+        > i {
+            visibility: visible;
+        }
+    }
+
+    > i {
+        visibility: hidden;
+        font-size: 5em;
+        color: $bGreyColor;
+    }
+}
+
 #fragment-config > div {
     > label {
         display: block;

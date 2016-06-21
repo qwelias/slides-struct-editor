@@ -1,0 +1,17 @@
+$bGreyColor: rgb(180, 180, 180);
+$bgGreyColor: rgb(245, 245, 245);
+
+@import '_layouts.scss';
+
+.slide-view{
+    font-size: 14px !important;
+    box-sizing: border-box;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+
+    > span {
+        font-size: 1.2em;
+    }
+}

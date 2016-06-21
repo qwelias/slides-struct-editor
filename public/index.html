@@ -15,7 +15,7 @@
         <link rel="stylesheet"
             href="css/fa.css">
         <link rel="stylesheet"
-            href="css/style.css">
+            href="css/editor.css">
         <!--[if IE]>
             <script src="lib/flexibility.js"></script>
         <![endif]-->
@@ -93,16 +93,16 @@
                             <button class="slide-number"
                                 data-bind="text: $index() + 1">
                             </button>
-                            <div class="slide-view min"
-                                data-bind="click: deck.activeSlideI.bind(null, $index())">
+                            <div data-bind="
+                                    attr:{class:'slide-view min ' + slide.data.attr.class()},
+                                    click: deck.activeSlideI.bind(null, $index())">
                                 <span data-bind="text: slide.data.title"></span>
-                                <div data-bind="
-                                    attr:{ class: 'slide-fragments ' + slide.data.attr.class() },
-                                    foreach: {
-                                        data: slide.data.fragments,
-                                        as: 'fragment'
-                                    }
-                                ">
+                                <div class="slide-fragments"
+                                    data-bind="
+                                        foreach: {
+                                            data: slide.data.fragments,
+                                            as: 'fragment'
+                                        }">
                                     <div data-bind="attr:{style:fragment.getBGStyle()}">
                                     </div>
                                 </div>
@@ -134,18 +134,19 @@
                         </label>
                     </div>
                     <div class="slide-frame">
-                        <div class="slide-view">
+                        <div data-bind="
+                                attr:{class:'slide-view ' + slide.data.attr.class()}">
                             <span>
                                 <input type="text"
                                     placeholder="slide title"
                                     data-bind="value: slide.data.title">
                             </span>
-                            <div data-bind="
-                                attr:{ class: 'slide-fragments ' + slide.data.attr.class() },
-                                foreach: {
-                                    data: slide.data.fragments,
-                                    as: 'fragment'
-                                }">
+                            <div class="slide-fragments"
+                                data-bind="
+                                    foreach: {
+                                        data: slide.data.fragments,
+                                        as: 'fragment'
+                                    }">
                                 <div data-bind="attr:{style:fragment.getBGStyle()}">
                                     <div class="fragment-overlay"
                                         data-bind="click: slide.openConfig.bind(slide, fragment)">

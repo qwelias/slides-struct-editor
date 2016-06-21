@@ -29,7 +29,7 @@ const fragment = {
 			type: "String"
 		}
 	}
-}
+};
 
 const slide = {
 	attr: {
@@ -39,7 +39,7 @@ const slide = {
 	title: {
 		type: "String"
 	}
-}
+};
 
 module.exports = {
 	plugin: {
@@ -57,4 +57,4 @@ module.exports = {
 		},
 		slides: [ slide ]
 	}
-}
+};
