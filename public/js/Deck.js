@@ -83,7 +83,7 @@
 	};
 
 	Deck.load = function load( id ) {
-		id = "57695aea4c09532129cae5e0";
+		id = "576a7f0a57f53a1b4181551e";
 		return ctx.Server.get( '/api/' + Deck.modelname + "/" + id ).then( function ( data ) {
 			var deck = data.result;
 			deck.slides = deck.slides.map( function ( s ) {
@@ -100,6 +100,8 @@
 
 	ctx._vm.init.push( Deck.load().then( function ( deck ) {
 		ctx._vm.deck = deck;
-	} ) );
+	} ).catch( function ( e ) {
+		ctx._vm.deck = Deck();
+	} ) )
 
 } )( window );

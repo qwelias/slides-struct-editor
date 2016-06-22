@@ -121,11 +121,11 @@ module.exports = {
 		// when the presentation is scaled to fit different resolutions. Can be
 		// specified using percentage units.
 		width: {
-			default: "900",
+			default: "1080",
 			type: "String"
 		},
 		height: {
-			default: "643",
+			default: "772",
 			type: "String"
 		},
 

@@ -6,8 +6,6 @@
 
 	Promise.all( ctx._vm.init ).then( function () {
 		console.log( "INITED" );
-		console.log( ctx._vm.deck );
-
 		ctx.ko.applyBindings( ctx._vm );
 	} ).catch( function ( e ) {
 		console.log( "INIT ERR:", e );
