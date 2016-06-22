@@ -16,12 +16,16 @@
 				},
 				title: '',
 				content: {
-					document: '',
-					year: '',
-					period: '',
-					report: '',
-					mode: '',
-					src: ''
+					generate:{
+						document: '',
+						year: '',
+						period: '',
+						report: '',
+						mode: ''
+					},
+					img: '',
+					html: '',
+					markdown: ''
 				}
 			};
 		}
@@ -31,7 +35,7 @@
 	Fragment.prototype.constructor = Fragment;
 
 	Fragment.prototype.getBGStyle = function getBGStyle(){
-		var src = this.data.content.src();
+		var src = this.data.content.img();
 		if( src ) return 'background-image: url('+src+'); background-position: center; background-size: contain; background-origin: content-box; background-repeat: no-repeat;';
 	};
 

@@ -1,6 +1,13 @@
 .slide-view {
     box-sizing: border-box;
     position: relative;
+    text-align: center;
+    padding: 1em;
+
+    > span {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
 
     * {
         box-sizing: border-box;
@@ -9,10 +16,14 @@
 
     > .slide-fragments {
         margin-top: 0.5em;
-        height: calc(100% - 2em);
+        height: calc(100% - 2.5em);
 
         > div {
             text-align: center;
+
+            > .fragment-html{
+                height: 100%;
+            }
         }
     }
 

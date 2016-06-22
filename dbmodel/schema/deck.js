@@ -7,26 +7,43 @@ const fragment = {
 		type: "Mixed"
 	},
 	title: {
-		type: "String"
+		type: "String",
+		trim: true
 	},
 	content: {
-		document: {
-			type: "String"
+		generate:{
+			document: {
+				type: "String",
+				trim: true
+			},
+			year: {
+				type: "String",
+				trim: true
+			},
+			period: {
+				type: "String",
+				trim: true
+			},
+			report: {
+				type: "String",
+				trim: true
+			},
+			mode: {
+				type: "String",
+				trim: true
+			}
 		},
-		year: {
-			type: "String"
+		html: {
+			type: "String",
+			trim: true
 		},
-		period: {
-			type: "String"
+		markdown: {
+			type: "String",
+			trim: true
 		},
-		report: {
-			type: "String"
-		},
-		mode: {
-			type: "String"
-		},
-		src: {
-			type: "String"
+		img: {
+			type: "String",
+			trim: true
 		}
 	}
 };
@@ -37,7 +54,8 @@ const slide = {
 	},
 	fragments: [ fragment ],
 	title: {
-		type: "String"
+		type: "String",
+		trim: true
 	}
 };
 
@@ -53,7 +71,8 @@ module.exports = {
 			type: "String",
 			required: true,
 			unique: true,
-			index: true
+			index: true,
+			trim: true
 		},
 		slides: [ slide ]
 	}

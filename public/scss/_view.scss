@@ -1,6 +1,4 @@
-
 .deck {
-
     > div {
         padding: 1em 0;
         border-bottom: solid 1px $bGreyColor;
@@ -44,7 +42,8 @@
     padding: 1em;
     overflow-y: scroll;
 
-    > button, .button{
+    .button,
+    > button {
         padding-left: 3em;
         padding-right: 3em;
     }
@@ -133,25 +132,19 @@
 }
 
 .slide-view {
-    text-align: center;
     border: solid 1px $bGreyColor;
     box-shadow: 0 0 1.5em 0.01em $bGreyColor;
     height: 50em;
     width: 70em;
-    padding: 1em;
 
-    > span {
-        font-size: 1.2em;
-
-        > input {
-            font-size: inherit;
-            width: 80%;
-        }
+    > span > input {
+        font-size: inherit;
+        width: 80%;
     }
 }
 
 .fragment-overlay {
-    position: absolute;
+    position: absolute !important;
     top: 0;
     right: 0;
     left: 0;
@@ -179,7 +172,7 @@
     }
 }
 
-#fragment-config > div {
+#fragment-config .popup-content {
     > label {
         display: block;
         padding: 0.5em 0;
@@ -188,10 +181,15 @@
             text-align: left;
             width: 100%;
         }
+
+        > textarea {
+            width: 100%;
+            resize: vertical;
+        }
     }
 }
 
-.popup{
+.popup {
     top: 0;
     bottom: 0;
     right: 0;
@@ -200,16 +198,27 @@
     position: fixed;
     background-color: rgba(0,0,0,0.3);
 
-    > div {
+    > .popup-window {
         margin: 5em auto;
-        height: calc(100% - 10em);
-        min-height: 30em;
-        width: calc(100% - 30em);
+        max-width: calc(100% - 30em);
         min-width: 50em;
         background-color: white;
         box-shadow: 0 0 1.5em 0.01em black;
         border-radius: 0.5em;
         border: solid 1px $bGreyColor;
         padding: 3em;
+
+        > .popup-head {
+            text-align: center;
+
+            > span {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        }
+
+        > .popup-content {
+            width: 100%;
+        }
     }
 }

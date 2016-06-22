@@ -103,7 +103,8 @@
                                             data: slide.data.fragments,
                                             as: 'fragment'
                                         }">
-                                    <div data-bind="attr:{style:fragment.getBGStyle()}">
+                                    <div data-bind="attr: { style: fragment.getBGStyle() }">
+                                        <div class="fragment-html" data-bind="visible: fragment.data.content.html, html: fragment.data.content.html"></div>
                                     </div>
                                 </div>
                             </div>
@@ -120,22 +121,22 @@
                     <div class="config-bar">
                         <label>
                             Transition
-                            <select data-bind="options: Deck.options.transition, value: slide.data.attr['data-transition']"></select>
+                            <select data-bind="options: Deck.options.transition, value: slide.data.attr[ 'data-transition' ]"></select>
                         </label>
                         <label>
                             Auto-slide
                             <input type="number"
                                 min="0"
-                                data-bind="value: slide.data.attr['data-autoslide']"> ms
+                                data-bind="value: slide.data.attr[ 'data-autoslide' ]"> ms
                         </label>
                         <label>
                             Layout
-                            <select data-bind="options: Object.keys(Slide.layouts), value: slide.data.attr.class"></select>
+                            <select data-bind="options: Object.keys( Slide.layouts ), value: slide.data.attr.class"></select>
                         </label>
                     </div>
                     <div class="slide-frame">
                         <div data-bind="
-                                attr:{class:'slide-view ' + slide.data.attr.class()}">
+                                attr: { class: 'slide-view ' + slide.data.attr.class() }">
                             <span>
                                 <input type="text"
                                     placeholder="slide title"
@@ -147,9 +148,10 @@
                                         data: slide.data.fragments,
                                         as: 'fragment'
                                     }">
-                                <div data-bind="attr:{style:fragment.getBGStyle()}">
+                                <div data-bind="attr: { style: fragment.getBGStyle() }">
+                                    <div class="fragment-html" data-bind="visible: fragment.data.content.html, html: fragment.data.content.html"></div>
                                     <div class="fragment-overlay"
-                                        data-bind="click: slide.openConfig.bind(slide, fragment)">
+                                        data-bind="click: slide.openConfig.bind( slide, fragment )">
                                         <i class="fa fa-cog"
                                             aria-hidden="true"></i>
                                     </div>
@@ -167,39 +169,56 @@
             style="display:none;"
             onclick="hidePopup(arguments[0])"
             data-bind="with: _vm.deck.getSlide() && _vm.deck.getSlide().activeFragment">
-            <div>
-                <label>
-                    <div>
-                        Document
-                    </div>
-                    <input type="text"
-                        data-bind="value: data.content.document">
-                </label>
-                <label>
-                    <div>Year</div>
-                    <input type="text"
-                        data-bind="value: data.content.year">
-                </label>
-                <label>
-                    <div>Period</div>
-                    <input type="text"
-                        data-bind="value: data.content.period">
-                </label>
-                <label>
-                    <div>Report</div>
-                    <input type="text"
-                        data-bind="value: data.content.report">
-                </label>
-                <label>
-                    <div>Mode</div>
-                    <input type="text"
-                        data-bind="value: data.content.mode">
-                </label>
-                <label>
-                    <div>Src</div>
-                    <input type="text"
-                        data-bind="value: data.content.src">
-                </label>
+            <div class="popup-window">
+                <div class="popup-head">
+                    <span>Fragment content</span>
+                </div>
+                <div class="popup-content">
+                    <label>
+                        <div>
+                            Document
+                        </div>
+                        <input type="text"
+                            data-bind="value: data.content.generate.document">
+                    </label>
+                    <label>
+                        <div>Year</div>
+                        <input type="text"
+                            data-bind="value: data.content.generate.year">
+                    </label>
+                    <label>
+                        <div>Period</div>
+                        <input type="text"
+                            data-bind="value: data.content.generate.period">
+                    </label>
+                    <label>
+                        <div>Report</div>
+                        <input type="text"
+                            data-bind="value: data.content.generate.report">
+                    </label>
+                    <label>
+                        <div>Mode</div>
+                        <input type="text"
+                            data-bind="value: data.content.generate.mode">
+                    </label>
+                    <label>
+                        <div>Img</div>
+                        <input type="text"
+                            data-bind="value: data.content.img">
+                    </label>
+                    <label>
+                        <div>HTML</div>
+                        <textarea type="text" rows="3"
+                            data-bind="value: data.content.html">
+                        </textarea>
+                    </label>
+                    <!-- <label>
+                        <div>MarkDown</div>
+                        <textarea type="text" rows="3"
+                            data-bind="value: data.content.markdown">
+                        </textarea>
+                    </label> -->
+                </div>
             </div>
         </div>
     </body>
