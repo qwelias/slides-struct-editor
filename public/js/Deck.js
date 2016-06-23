@@ -53,6 +53,15 @@
 		return this.data.slides()[ i ];
 	};
 
+	Deck.prototype.getContentsHTML = function getContentsHTML() {
+		var slides = this.data.slides();
+		return "<div class='deck-contents'><div>" +
+		slides.map( function ( s ) {
+			return s.getContentsHTML();
+		} ).join( "</div><div>" ) +
+		"</div></div>";
+	};
+
 	Deck.prototype.removeSlide = function removeSlide( i ) {
 		this.data.slides.splice( i, 1 );
 		var l = this.data.slides().length;

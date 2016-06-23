@@ -39,6 +39,12 @@
 		if ( src ) return 'background-image: url(' + src + '); background-position: center; background-size: contain; background-origin: content-box; background-repeat: no-repeat;';
 	};
 
+	Fragment.prototype.getContentsHTML = function getContentsHTML() {
+		var title = this.data.title() || this.data.content.generate.document();
+		if( title ) return "<li>" + title + "</li>";
+		return '';
+	};
+
 	delete Fragment.prototype.save;
 
 	ctx.Fragment = Fragment;

@@ -53,6 +53,18 @@
 		return r;
 	};
 
+	Slide.prototype.getContentsHTML = function getContentsHTML() {
+		var title = "<span>" + this.data.title() + "</span>";
+		var fragments = this.data.fragments().map( function ( f ) {
+			return f.getContentsHTML();
+		} ).join('');
+		return title + (
+			fragments ?
+			"<ul>" + fragments + "</ul>" :
+			""
+		)
+	};
+
 	Slide.prototype.setLayout = function setLayout( name ) {
 		var old = this.data.fragments();
 		var fragments = new Array( Slide.layouts[ name ] || 1 ).fill( 0 ).map( function ( f, i ) {
