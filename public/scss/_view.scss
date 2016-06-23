@@ -1,4 +1,5 @@
 .deck {
+    padding: 1em;
     > div {
         padding: 1em 0;
         border-bottom: solid 1px $bGreyColor;
@@ -6,11 +7,11 @@
 }
 
 .deck-head {
-    padding: 1em;
     text-align: center;
 
-    > input {
+    > input[type="text"] {
         width: 80%;
+        max-width: calc(100% - 5em);
         font-size: 2em;
     }
 }
@@ -185,40 +186,6 @@
         > textarea {
             width: 100%;
             resize: vertical;
-        }
-    }
-}
-
-.popup {
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 20;
-    position: fixed;
-    background-color: rgba(0,0,0,0.3);
-
-    > .popup-window {
-        margin: 5em auto;
-        max-width: calc(100% - 30em);
-        min-width: 50em;
-        background-color: white;
-        box-shadow: 0 0 1.5em 0.01em black;
-        border-radius: 0.5em;
-        border: solid 1px $bGreyColor;
-        padding: 3em;
-
-        > .popup-head {
-            text-align: center;
-
-            > span {
-                font-size: 1.5em;
-                font-weight: bold;
-            }
-        }
-
-        > .popup-content {
-            width: 100%;
         }
     }
 }

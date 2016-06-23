@@ -16,7 +16,7 @@
 				},
 				title: '',
 				content: {
-					generate:{
+					generate: {
 						document: '',
 						year: '',
 						period: '',
@@ -34,9 +34,9 @@
 	Fragment.prototype = Object.create( SObject.prototype, {} );
 	Fragment.prototype.constructor = Fragment;
 
-	Fragment.prototype.getBGStyle = function getBGStyle(){
+	Fragment.prototype.getBGStyle = function getBGStyle() {
 		var src = this.data.content.img();
-		if( src ) return 'background-image: url('+src+'); background-position: center; background-size: contain; background-origin: content-box; background-repeat: no-repeat;';
+		if ( src ) return 'background-image: url(' + src + '); background-position: center; background-size: contain; background-origin: content-box; background-repeat: no-repeat;';
 	};
 
 	delete Fragment.prototype.save;

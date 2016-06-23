@@ -1,0 +1,102 @@
+input[type="checkbox"].trigger {
+    display: none;
+}
+
+#slide-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 30em;
+    max-width: 100%;
+    left: -30em;
+    z-index: 100;
+    transition: 0.5s ease-in-out;
+    transition-property: left, right, box-shadow;
+    background-color: inherit;
+    padding: 1em;
+
+    > label.slide-menu-trigger {
+        float: right;
+    }
+}
+
+label.slide-menu-trigger {
+    font-size: 3em;
+    padding: 0.3em 0.4em;
+    line-height: 0;
+    cursor: pointer;
+}
+
+#slide-menu-trigger:checked + #slide-menu {
+    left: 0;
+    box-shadow: 0 0 1.5em 0.01em grey;
+}
+
+.popup {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    position: fixed;
+    background-color: rgba(0,0,0,0.3);
+
+    > .popup-window {
+        margin: 5em auto;
+        max-width: calc(100% - 30em);
+        min-width: 50em;
+        background-color: white;
+        box-shadow: 0 0 1.5em 0.01em black;
+        border-radius: 0.5em;
+        border: solid 1px grey;
+        padding: 3em;
+
+        > .popup-head {
+            text-align: center;
+
+            > span {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        }
+
+        > .popup-content {
+            width: 100%;
+        }
+    }
+}
+
+.button,
+button {
+    background-color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    outline: none;
+    padding: 0.5em 0.8em;
+    cursor: pointer;
+    border: solid 1px grey;
+    border-radius: 5px;
+    color: inherit;
+    text-decoration: none;
+
+    > i {
+        vertical-align: middle;
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+        color: rgb(100,100,100);
+
+        &:hover {
+            background-color: inherit;
+        }
+    }
+
+    &:hover {
+        background-color: transparentize(grey, 0.8);
+    }
+
+    &.active {
+        background-color: rgb(238, 238, 238);
+    }
+}

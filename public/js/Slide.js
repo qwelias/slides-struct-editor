@@ -55,15 +55,15 @@
 
 	Slide.prototype.setLayout = function setLayout( name ) {
 		var old = this.data.fragments();
-		var fragments = new Array( Slide.layouts[ name ] || 1 ).fill( 0 ).map( function (f, i) {
-			return old[i] || ctx.Fragment();
+		var fragments = new Array( Slide.layouts[ name ] || 1 ).fill( 0 ).map( function ( f, i ) {
+			return old[ i ] || ctx.Fragment();
 		} );
 		this.data.fragments( fragments );
 	};
 
 	Slide.prototype.openConfig = function openConfig( fragment ) {
 		this.activeFragment( fragment );
-		ctx.$('#fragment-config').show();
+		ctx.$( '#fragment-config' ).show();
 	};
 
 	delete Slide.prototype.save;
