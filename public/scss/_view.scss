@@ -1,5 +1,6 @@
 .deck {
     padding: 1em;
+
     > div {
         padding: 1em 0;
         border-bottom: solid 1px $bGreyColor;
@@ -14,19 +15,24 @@
         max-width: calc(100% - 5em);
         font-size: 2em;
     }
+
+    button {
+        float: right;
+    }
 }
 
 .config-bar {
-    > label {
+    > * {
         padding: 0.2em 0.5em;
         border-right: solid 1px $bGreyColor;
+        vertical-align: bottom;
 
         &:last-child {
             border: none;
         }
 
         > input[type="number"] {
-            width: 5em;
+            width: 4em;
         }
     }
 }
@@ -43,8 +49,8 @@
     padding: 1em;
     overflow-y: scroll;
 
-    .button,
-    > button {
+     > button,
+    .button {
         padding-left: 3em;
         padding-right: 3em;
     }
@@ -121,6 +127,10 @@
         padding-left: 1em;
         padding-bottom: 1em;
         border-bottom: solid 1px $bGreyColor;
+
+        > span {
+            font-weight: bold;
+        }
     }
 }
 

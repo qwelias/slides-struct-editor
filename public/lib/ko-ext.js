@@ -28,12 +28,22 @@ ko.virtualElements.allowedBindings[ 'let' ] = true;
 ko.bindingHandlers[ 'editable' ] = {
 	init: function ( element, valueAccessor ) {
 		var val = valueAccessor();
-		element.onkeyup = function () {
+		element.onchange = function () {
 			val( element.innerText.trim() );
 		};
 	},
 	update: function ( element, valueAccessor ) {
 		var val = valueAccessor()();
 		element.innerText = val;
+	}
+};
+
+ko.bindingHandlers[ 'secondsValue' ] = {
+	init: function ( element, valueAccessor, allBindings, viewModel, bindingContext ) {
+		var v = valueAccessor();
+		element.value = v();
+		element.onchange = function () {
+			v( Math.abs( element.value * 1000 ) );
+		};
 	}
 };

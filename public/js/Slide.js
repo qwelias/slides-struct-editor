@@ -47,8 +47,8 @@
 
 	Slide.prototype.toJS = function toJS() {
 		var r = SObject.prototype.toJS.call( this );
-		r.fragments = r.fragments.map( function ( s ) {
-			return s.toJS();
+		r.fragments = r.fragments.map( function ( f ) {
+			return f.toJS();
 		} );
 		return r;
 	};

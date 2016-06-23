@@ -36,32 +36,33 @@
                 <input type="text"
                     placeholder="deck title"
                     data-bind="value: deck.data.title">
+                <button data-bind="click: deck.open.bind(deck)">Сохранить и открыть</button>
             </div>
             <div class="config-bar"
                 data-bind="with: deck.data.reveal">
                 <label>
-                    Theme
+                    Тема
                     <select data-bind="options: Deck.options.theme, value: theme"></select>
                 </label>
                 <label>
-                    Transition
+                    Переход
                     <select data-bind="options: Deck.options.transition, value: config.transition"></select>
                 </label>
                 <label>
-                    Loop
+                    Зациклить
                     <input type="checkbox"
                         data-bind="checked: config.loop">
                 </label>
                 <label>
-                    Controls
+                    Навигация
                     <input type="checkbox"
                         data-bind="checked: config.controls">
                 </label>
                 <label>
-                    Auto-slide
+                    Авто-пролистывание
                     <input type="number"
                         min="0"
-                        data-bind="value: config.autoSlide"> ms
+                        data-bind="secondsValue: config.autoSlide"> с
                 </label>
             </div>
             <div class="deck-content">
@@ -104,7 +105,8 @@
                                             as: 'fragment'
                                         }">
                                     <div data-bind="attr: { style: fragment.getBGStyle() }">
-                                        <div class="fragment-html" data-bind="visible: fragment.data.content.html, html: fragment.data.content.html"></div>
+                                        <div class="fragment-html"
+                                            data-bind="visible: fragment.data.content.html, html: fragment.data.content.html"></div>
                                     </div>
                                 </div>
                             </div>
@@ -119,18 +121,19 @@
                     data-bind="with: deck.getSlide()">
                     <!-- ko alias: 'slide' -->
                     <div class="config-bar">
+                        <span data-bind="text: deck.activeSlideI() + 1"></span>
                         <label>
-                            Transition
+                            Переход
                             <select data-bind="options: Deck.options.transition, value: slide.data.attr[ 'data-transition' ]"></select>
                         </label>
                         <label>
-                            Auto-slide
+                            Авто-пролистывание
                             <input type="number"
                                 min="0"
-                                data-bind="value: slide.data.attr[ 'data-autoslide' ]"> ms
+                                data-bind="secondsValue: slide.data.attr[ 'data-autoslide' ]"> с
                         </label>
                         <label>
-                            Layout
+                            Макет
                             <select data-bind="options: Object.keys( Slide.layouts ), value: slide.data.attr.class"></select>
                         </label>
                     </div>
@@ -149,7 +152,8 @@
                                         as: 'fragment'
                                     }">
                                 <div data-bind="attr: { style: fragment.getBGStyle() }">
-                                    <div class="fragment-html" data-bind="visible: fragment.data.content.html, html: fragment.data.content.html"></div>
+                                    <div class="fragment-html"
+                                        data-bind="visible: fragment.data.content.html, html: fragment.data.content.html"></div>
                                     <div class="fragment-overlay"
                                         data-bind="click: slide.openConfig.bind( slide, fragment )">
                                         <i class="fa fa-cog"
@@ -168,47 +172,48 @@
             class="popup"
             style="display:none;"
             onclick="hidePopup(arguments[0])"
-            data-bind="with: _vm.deck.getSlide() && _vm.deck.getSlide().activeFragment">
+            data-bind="with: _vm.deck().getSlide() && _vm.deck().getSlide().activeFragment">
             <div class="popup-window">
                 <div class="popup-head">
-                    <span>Fragment content</span>
+                    <span>Содержимое фрагмента</span>
                 </div>
                 <div class="popup-content">
                     <label>
                         <div>
-                            Document
+                            Документ
                         </div>
                         <input type="text"
                             data-bind="value: data.content.generate.document">
                     </label>
                     <label>
-                        <div>Year</div>
+                        <div>Год</div>
                         <input type="text"
                             data-bind="value: data.content.generate.year">
                     </label>
                     <label>
-                        <div>Period</div>
+                        <div>Период</div>
                         <input type="text"
                             data-bind="value: data.content.generate.period">
                     </label>
                     <label>
-                        <div>Report</div>
+                        <div>Отчёт</div>
                         <input type="text"
                             data-bind="value: data.content.generate.report">
                     </label>
                     <label>
-                        <div>Mode</div>
+                        <div>Режим</div>
                         <input type="text"
                             data-bind="value: data.content.generate.mode">
                     </label>
                     <label>
-                        <div>Img</div>
+                        <div>Изображение</div>
                         <input type="text"
                             data-bind="value: data.content.img">
                     </label>
                     <label>
-                        <div>HTML</div>
-                        <textarea type="text" rows="3"
+                        <div>Текст (HTML)</div>
+                        <textarea type="text"
+                            rows="3"
                             data-bind="value: data.content.html">
                         </textarea>
                     </label>

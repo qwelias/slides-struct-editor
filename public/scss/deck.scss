@@ -1,10 +1,13 @@
 $bGreyColor: rgb(180, 180, 180);
 $bgGreyColor: rgb(245, 245, 245);
-
 @import '_layouts.scss';
 
-.slide-view{
+.slide-view {
     font-size: 14px !important;
     height: 100%;
     width: 100%;
+}
+
+.slide-fragments > div {
+    border: none !important;
 }

@@ -11,6 +11,11 @@
 	function SObject( data, model ) {
 		if ( !( this instanceof SObject ) ) return new SObject( data, model );
 
+		this._id = data._id || null;
+
+		delete data._id;
+		delete data.__v;
+
 		this.initial = JSON.parse( JSON.stringify( ko.toJS( data ) ) );
 
 		this.model = model;
@@ -31,11 +36,15 @@
 	};
 
 	SObject.prototype.toJS = function toJS() {
-		return ko.toJS( this.data );
+		var r = ko.toJS( this.data );
+		if ( this._id ) r._id = this._id;
+		return r;
 	};
 
 	SObject.prototype.save = function save() {
-		return Server.save( '/api/' + this.model, this.toJS() );
+		return Server.save( '/api/' + this.model, this.toJS() ).then( function ( data ) {
+			if ( !this._id ) this._id = data.result._id;
+		}.bind( this ) );
 	};
 
 	ctx.SObject = SObject;

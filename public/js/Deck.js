@@ -82,8 +82,15 @@
 		} );
 	};
 
+	Deck.prototype.open = function open() {
+		return this.save().then( function () {
+			var win = ctx.open( '/decks/' + this._id + '.html', '_blank' );
+			if ( win ) win.focus();
+			else alert( 'Please allow popups for this site' );
+		}.bind( this ) );
+	};
+
 	Deck.load = function load( id ) {
-		id = "576a7f0a57f53a1b4181551e";
 		return ctx.Server.get( '/api/' + Deck.modelname + "/" + id ).then( function ( data ) {
 			var deck = data.result;
 			deck.slides = deck.slides.map( function ( s ) {
@@ -98,10 +105,10 @@
 
 	ctx.Deck = Deck;
 
-	ctx._vm.init.push( Deck.load().then( function ( deck ) {
-		ctx._vm.deck = deck;
+	ctx._vm.init.push( Deck.load( "576bccb6ceacb6e11d238973" ).then( function ( deck ) {
+		ctx._vm.deck = ko.observable( deck );
 	} ).catch( function ( e ) {
-		ctx._vm.deck = Deck();
+		ctx._vm.deck = ko.observable( Deck() );
 	} ) )
 
 } )( window );
