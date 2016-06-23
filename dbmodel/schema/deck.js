@@ -69,8 +69,6 @@ module.exports = {
 		reveal: defaultRevealConfigSchema,
 		title: {
 			type: "String",
-			required: true,
-			unique: true,
 			index: true,
 			trim: true
 		},
