@@ -8,8 +8,6 @@
 }
 
 .deck-head {
-    text-align: center;
-
     > input[type="text"] {
         width: 80%;
         max-width: calc(100% - 5em);
@@ -32,7 +30,11 @@
         }
 
         > input[type="number"] {
-            width: 4em;
+            width: 3em;
+        }
+
+        > input[type="text"] {
+            width: 16em;
         }
     }
 }
@@ -49,8 +51,8 @@
     padding: 1em;
     overflow-y: scroll;
 
-     > button,
-    .button {
+    .button,
+    > button {
         padding-left: 3em;
         padding-right: 3em;
     }
@@ -147,10 +149,21 @@
     box-shadow: 0 0 1.5em 0.01em $bGreyColor;
     height: 50em;
     width: 70em;
+}
 
-    > span > input {
-        font-size: inherit;
-        width: 80%;
+.slide-header {
+    > span {
+        > input {
+            text-align: center;
+            font-size: inherit;
+            color: inherit;
+            width: 66%;
+        }
+
+        &:last-child > input {
+            width: 100%;
+            text-align: right;
+        }
     }
 }
 

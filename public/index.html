@@ -34,7 +34,7 @@
             <!-- ko alias: 'deck' -->
             <div class="deck-head">
                 <input type="text"
-                    placeholder="deck title"
+                    placeholder="название презентации"
                     data-bind="value: deck.data.title">
                 <button data-bind="click: deck.open.bind(deck)">Сохранить и открыть</button>
             </div>
@@ -63,6 +63,16 @@
                     <input type="number"
                         min="0"
                         data-bind="secondsValue: config.autoSlide"> с
+                </label>
+                <label>
+                    <input type="text"
+                        placeholder="стандартный верхний колонтитул"
+                        data-bind="value: deck.defaultHeader">
+                </label>
+                <label>
+                    <input type="text"
+                        placeholder="стандартный нижний колонтитул"
+                        data-bind="value: deck.defaultFooter">
                 </label>
             </div>
             <div class="deck-content">
@@ -97,17 +107,30 @@
                             <div data-bind="
                                     attr:{class:'slide-view min ' + slide.data.attr.class()},
                                     click: deck.activeSlideI.bind(null, $index())">
-                                <span data-bind="text: slide.data.title"></span>
+                                <div class="slide-header"
+                                    data-bind="visible: slide.data.header.enabled">
+                                    <span data-bind="text: slide.data.title"></span>
+                                    <span data-bind="text: slide.data.header.text"></span>
+                                </div>
                                 <div class="slide-fragments"
                                     data-bind="
                                         foreach: {
                                             data: slide.data.fragments,
                                             as: 'fragment'
+                                        },
+                                        css: {
+                                            headered: slide.data.header.enabled,
+                                            footered: slide.data.footer.enabled
                                         }">
                                     <div data-bind="attr: { style: fragment.getBGStyle() }">
                                         <div class="fragment-html"
                                             data-bind="visible: fragment.data.content.html, html: fragment.data.content.html"></div>
                                     </div>
+                                </div>
+                                <div class="slide-footer"
+                                    data-bind="visible: slide.data.footer.enabled">
+                                    <div data-bind="text: slide.data.footer.text"></div>
+                                    <div data-bind="text: deck.getActiveFooter()"></div>
                                 </div>
                             </div>
                         </li>
@@ -136,20 +159,42 @@
                             Макет
                             <select data-bind="options: Object.keys( Slide.layouts ), value: slide.data.attr.class"></select>
                         </label>
+                        <label>
+                            Верхний колонтитул
+                            <input type="checkbox"
+                                data-bind="checked: slide.data.header.enabled">
+                        </label>
+                        <label>
+                            Нижний колонтитул
+                            <input type="checkbox"
+                                data-bind="checked: slide.data.footer.enabled">
+                        </label>
                     </div>
                     <div class="slide-frame">
                         <div data-bind="
                                 attr: { class: 'slide-view ' + slide.data.attr.class() }">
-                            <span>
-                                <input type="text"
-                                    placeholder="slide title"
-                                    data-bind="value: slide.data.title">
-                            </span>
+                            <div class="slide-header"
+                                data-bind="visible: slide.data.header.enabled">
+                                <span>
+                                    <input type="text"
+                                        placeholder="заголовок слайда"
+                                        data-bind="value: slide.data.title">
+                                </span>
+                                <span>
+                                    <input type="text"
+                                        placeholder="колонтитул"
+                                        data-bind="value: slide.data.header.text">
+                                </span>
+                            </div>
                             <div class="slide-fragments"
                                 data-bind="
                                     foreach: {
                                         data: slide.data.fragments,
                                         as: 'fragment'
+                                    },
+                                    css: {
+                                        headered: slide.data.header.enabled,
+                                        footered: slide.data.footer.enabled
                                     }">
                                 <div data-bind="attr: { style: fragment.getBGStyle() }">
                                     <div class="fragment-html"
@@ -160,6 +205,15 @@
                                             aria-hidden="true"></i>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="slide-footer"
+                                data-bind="visible: slide.data.footer.enabled">
+                                <div>
+                                    <input type="text"
+                                        placeholder="колонтитул"
+                                        data-bind="value: slide.data.footer.text">
+                                </div>
+                                <div data-bind="text: deck.getActiveFooter()"></div>
                             </div>
                         </div>
                     </div>

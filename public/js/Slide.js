@@ -21,7 +21,15 @@
 					"data-transition": 'default'
 				},
 				fragments: [ ctx.Fragment() ],
-				title: ''
+				title: '',
+				header: {
+					enabled: true,
+					text: ''
+				},
+				footer: {
+					enabled: true,
+					text: ''
+				}
 			};
 		}
 	} );

@@ -5,6 +5,8 @@
 		if ( !( this instanceof Deck ) ) return new Deck( data );
 
 		this.activeSlideI = ko.observable( 0 );
+		this.defaultHeader = ko.observable( '' );
+		this.defaultFooter = ko.observable( '' );
 
 		ctx.SObject.call( this, data || Deck.default, Deck.modelname );
 	};
@@ -45,6 +47,16 @@
 	Deck.prototype.constructor = Deck;
 
 	Deck.prototype.addSlide = function addSlide( data ) {
+		data = data || Object.assign( ctx.Slide.default, {
+			header: {
+				text: this.defaultHeader(),
+				enabled: true
+			},
+			footer: {
+				text: this.defaultFooter(),
+				enabled: true
+			}
+		} );
 		this.data.slides.push( ctx.Slide( data ) );
 	};
 
@@ -60,6 +72,10 @@
 			return s.getContentsHTML();
 		} ).join( "</div><div>" ) +
 		"</div></div>";
+	};
+
+	Deck.prototype.getActiveFooter = function getActiveFooter() {
+		return 'Слайд ' + ( this.activeSlideI() + 1 ) + '/' + this.data.slides().length;
 	};
 
 	Deck.prototype.removeSlide = function removeSlide( i ) {

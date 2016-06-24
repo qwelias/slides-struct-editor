@@ -56,6 +56,26 @@ const slide = {
 	title: {
 		type: "String",
 		trim: true
+	},
+	header: {
+		enabled: {
+			type: "Boolean",
+			default: false
+		},
+		text: {
+			type: "String",
+			trim: true
+		}
+	},
+	footer: {
+		enabled: {
+			type: "Boolean",
+			default: false
+		},
+		text: {
+			type: "String",
+			trim: true
+		}
 	}
 };
 

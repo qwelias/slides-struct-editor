@@ -23,14 +23,14 @@ body {
     }
 
     input {
-        vertical-align: middle;
+        vertical-align: bottom;
 
         &[type="number"],
         &[type="text"] {
-            text-align: center;
             outline: none;
             border: none;
             border-bottom: dashed 1px $bGreyColor;
+            padding: 0;
         }
     }
 }
