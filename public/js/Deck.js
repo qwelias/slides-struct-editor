@@ -68,14 +68,26 @@
 	Deck.prototype.getContentsHTML = function getContentsHTML() {
 		var slides = this.data.slides();
 		return "<div class='deck-contents'><div>" +
-		slides.map( function ( s ) {
-			return s.getContentsHTML();
-		} ).join( "</div><div>" ) +
-		"</div></div>";
+			slides.map( function ( s ) {
+				return s.getContentsHTML();
+			} ).join( "</div><div>" ) +
+			"</div></div>";
 	};
 
 	Deck.prototype.getActiveFooter = function getActiveFooter() {
-		return 'Слайд ' + ( this.activeSlideI() + 1 ) + '/' + this.data.slides().length;
+		var all = this.data.slides();
+		var excluded = all.reduce( function ( carry, s, i ) {
+			if ( !s.data.footer.enabled() ) carry.push( i );
+			return carry;
+		}, [] );
+		all = all.length;
+		var j = this.activeSlideI();
+		j++;
+		excluded.map( function ( i ) {
+			if ( i < j ) j--;
+		} );
+		excluded = excluded.length;
+		return 'Слайд ' + ( j ) + '/' + ( all - excluded );
 	};
 
 	Deck.prototype.removeSlide = function removeSlide( i ) {
