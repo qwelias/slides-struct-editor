@@ -41,7 +41,7 @@ ko.bindingHandlers[ 'editable' ] = {
 ko.bindingHandlers[ 'secondsValue' ] = {
 	init: function ( element, valueAccessor, allBindings, viewModel, bindingContext ) {
 		var v = valueAccessor();
-		element.value = v();
+		element.value = v() / 1000;
 		element.onchange = function () {
 			v( Math.abs( element.value * 1000 ) );
 		};

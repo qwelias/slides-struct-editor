@@ -4,7 +4,7 @@
 	ctx.typeOf = function typeOf( v ) {
 		if ( Array.isArray( v ) ) return 'array';
 		if ( v === null ) return 'null';
-		if ( v.constructor && v.constructor.name !== 'Object' ) return v.constructor.name;
+		if ( typeof v === 'object' && v.constructor && v.constructor.name !== 'Object' ) return v.constructor.name;
 		return typeof v;
 	};
 
@@ -25,12 +25,14 @@
 	};
 
 	SObject.fromJS = function fromJS( o ) {
-		var out = {};
+		var out = typeOf( o ) === 'array' ? [] : {};
 		Object.keys( o ).map( function ( k ) {
 			if ( typeOf( o[ k ] ) === 'object' ) out[ k ] = fromJS( o[ k ] );
-			else if ( typeOf( o[ k ] ) === 'array' ) out[ k ] = ko.observableArray( o[ k ] );
-			else if ( typeOf( o[ k ] ) === 'function' ) out[ k ] = o[ k ];
-			else return out[ k ] = ko.observable( o[ k ] );
+			else if ( typeOf( o[ k ] ) === 'array' )
+				out[ k ] = ko.observableArray( fromJS( o[ k ] ) );
+			else if ( [ 'number', 'boolean', 'string', 'null', 'undefined' ].indexOf( typeOf( o[ k ] ) ) > -1 )
+				return out[ k ] = ko.observable( o[ k ] );
+			else out[ k ] = o[ k ];
 		} );
 		return out;
 	};

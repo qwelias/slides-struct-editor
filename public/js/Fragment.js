@@ -12,7 +12,7 @@
 		get: function () {
 			return {
 				attr: {
-					"data-autoslide": '1'
+					"data-autoslide": 0
 				},
 				title: '',
 				content: {

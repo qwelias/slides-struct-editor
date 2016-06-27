@@ -18,6 +18,7 @@
             font-weight: bold;
 
             &:last-child {
+                font-weight: normal;
                 position: absolute;
                 font-size: 1em;
                 color: $bGreyColor;

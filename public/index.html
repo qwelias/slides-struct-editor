@@ -129,8 +129,8 @@
                                 </div>
                                 <div class="slide-footer"
                                     data-bind="visible: slide.data.footer.enabled">
-                                    <div data-bind="text: slide.data.footer.text"></div>
-                                    <div data-bind="text: deck.getActiveFooter()"></div>
+                                    <div data-bind="text: slide.data.footer.text()[0]"></div>
+                                    <div data-bind="text: deck.getFooter( deck.activeSlideI() )"></div>
                                 </div>
                             </div>
                         </li>
@@ -150,10 +150,14 @@
                             <select data-bind="options: Deck.options.transition, value: slide.data.attr[ 'data-transition' ]"></select>
                         </label>
                         <label>
+                            <input type="checkbox"
+                            data-bind="checked: slide.data.useLocalAS">
                             Авто-пролистывание
                             <input type="number"
                                 min="0"
-                                data-bind="secondsValue: slide.data.attr[ 'data-autoslide' ]"> с
+                                data-bind="
+                                    attr:{disabled:slide.data.useLocalAS() ? null : true},
+                                    secondsValue: slide.data.attr[ 'data-autoslide' ]"> с
                         </label>
                         <label>
                             Макет
@@ -211,9 +215,9 @@
                                 <div>
                                     <input type="text"
                                         placeholder="колонтитул"
-                                        data-bind="value: slide.data.footer.text">
+                                        data-bind="value: slide.data.footer.text()[0]">
                                 </div>
-                                <div data-bind="text: deck.getActiveFooter()"></div>
+                                <div data-bind="text: deck.getFooter( deck.activeSlideI() )"></div>
                             </div>
                         </div>
                     </div>

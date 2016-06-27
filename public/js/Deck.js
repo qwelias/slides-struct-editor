@@ -53,7 +53,7 @@
 				enabled: true
 			},
 			footer: {
-				text: this.defaultFooter(),
+				text: [ this.defaultFooter(), '' ],
 				enabled: true
 			}
 		} );
@@ -74,14 +74,14 @@
 			"</div></div>";
 	};
 
-	Deck.prototype.getActiveFooter = function getActiveFooter() {
+	Deck.prototype.getFooter = function getFooter( j ) {
+		var j = typeOf( j ) === 'number' ? j : this.activeSlideI();
 		var all = this.data.slides();
 		var excluded = all.reduce( function ( carry, s, i ) {
 			if ( !s.data.footer.enabled() ) carry.push( i );
 			return carry;
 		}, [] );
 		all = all.length;
-		var j = this.activeSlideI();
 		j++;
 		excluded.map( function ( i ) {
 			if ( i < j ) j--;
@@ -112,6 +112,12 @@
 	};
 
 	Deck.prototype.save = function save() {
+		var slides = this.data.slides();
+		slides.map( function ( s, i ) {
+			if ( s.data.footer.enabled() ) {
+				s.data.footer.text()[ 1 ] = this.getFooter( i );
+			}
+		}.bind( this ) );
 		return ctx.SObject.prototype.save.call( this ).then( function () {
 			console.log( 'saved' );
 		}.bind( this ) ).catch( function ( e ) {
@@ -142,7 +148,7 @@
 
 	ctx.Deck = Deck;
 
-	ctx._vm.init.push( Deck.load( "576bccb6ceacb6e11d238973" ).then( function ( deck ) {
+	ctx._vm.init.push( Deck.load( "57710f53a3b504f6166e7441" ).then( function ( deck ) {
 		ctx._vm.deck = ko.observable( deck );
 	} ).catch( function ( e ) {
 		ctx._vm.deck = ko.observable( Deck() );

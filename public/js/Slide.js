@@ -22,13 +22,14 @@
 				},
 				fragments: [ ctx.Fragment() ],
 				title: '',
+				useLocalAS: false,
 				header: {
 					enabled: true,
 					text: ''
 				},
 				footer: {
 					enabled: true,
-					text: ''
+					text: [ '', '' ]
 				}
 			};
 		}
@@ -65,7 +66,7 @@
 		var title = "<span>" + this.data.title() + "</span>";
 		var fragments = this.data.fragments().map( function ( f ) {
 			return f.getContentsHTML();
-		} ).join('');
+		} ).join( '' );
 		return title + (
 			fragments ?
 			"<ul>" + fragments + "</ul>" :

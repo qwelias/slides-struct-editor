@@ -11,7 +11,7 @@ const fragment = {
 		trim: true
 	},
 	content: {
-		generate:{
+		generate: {
 			document: {
 				type: "String",
 				trim: true
@@ -57,6 +57,10 @@ const slide = {
 		type: "String",
 		trim: true
 	},
+	useLocalAS: {
+		type: "Boolean",
+		default: false
+	},
 	header: {
 		enabled: {
 			type: "Boolean",
@@ -72,10 +76,10 @@ const slide = {
 			type: "Boolean",
 			default: false
 		},
-		text: {
+		text: [ {
 			type: "String",
 			trim: true
-		}
+		} ]
 	}
 };
 
