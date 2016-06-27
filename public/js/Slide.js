@@ -6,6 +6,10 @@
 
 		this.activeFragment = ko.observable();
 
+		if(data && data.fragments) data.fragments = data.fragments.map( function ( f ) {
+			return ctx.Fragment( f );
+		} );
+
 		SObject.call( this, data || Slide.default );
 
 		this.data.attr.class.subscribe( Slide.prototype.setLayout.bind( this ) );

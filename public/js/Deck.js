@@ -8,6 +8,10 @@
 		this.defaultHeader = ko.observable( '' );
 		this.defaultFooter = ko.observable( '' );
 
+		if ( data && data.slides ) data.slides = data.slides.map( function ( s ) {
+			return ctx.Slide( s );
+		} );
+
 		ctx.SObject.call( this, data || Deck.default, Deck.modelname );
 	};
 
@@ -136,12 +140,6 @@
 	Deck.load = function load( id ) {
 		return ctx.Server.get( '/api/' + Deck.modelname + "/" + id ).then( function ( data ) {
 			var deck = data.result;
-			deck.slides = deck.slides.map( function ( s ) {
-				s.fragments = s.fragments.map( function ( f ) {
-					return ctx.Fragment( f );
-				} );
-				return ctx.Slide( s );
-			} );
 			return Deck( deck );
 		} );
 	};
