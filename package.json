@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "buildScss": "node_modules/.bin/node-sass -r public/scss/ --output-style compressed -o public/css/",
-    "watchScss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/"
+    "watchScss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/",
+    "watchCss": "node_modules/.bin/postcss -w -u autoprefixer -r public/css/*.css"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,8 @@
     "rimraf": "2.5.2"
   },
   "devDependencies": {
-    "node-sass": "3.7.0"
+    "autoprefixer": "6.3.6",
+    "node-sass": "3.7.0",
+    "postcss-cli": "2.5.2"
   }
 }
