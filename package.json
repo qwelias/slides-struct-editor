@@ -6,7 +6,7 @@
   "scripts": {
     "buildScss": "node_modules/.bin/node-sass -r public/scss/ --output-style compressed -o public/css/",
     "watchScss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/",
-    "watchCss": "node_modules/.bin/postcss -w -u autoprefixer -r public/css/*.css"
+    "watchCss": "node_modules/.bin/postcss -w -u autoprefixer --autoprefixer.browsers \"Chrome > 20\" -r public/css/*.css"
   },
   "repository": {
     "type": "git",
