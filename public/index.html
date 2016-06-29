@@ -36,7 +36,11 @@
                 <input type="text"
                     placeholder="название презентации"
                     data-bind="value: deck.data.title">
-                <button data-bind="click: deck.open.bind(deck)">Сохранить и открыть</button>
+                <span>
+                    <button data-bind="click: deck.open.bind( deck, null )">Сохранить</button> |
+                    <button data-bind="click: deck.open.bind( deck, 'html' )">HTML</button> |
+                    <button data-bind="click: deck.open.bind( deck, 'pdf' )">PDF</button>
+                </span>
             </div>
             <div class="config-bar"
                 data-bind="with: deck.data.reveal">
