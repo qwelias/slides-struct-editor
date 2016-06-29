@@ -129,11 +129,23 @@
 		} );
 	};
 
-	Deck.prototype.open = function open() {
+	Deck.prototype.open = function open( how ) {
 		return this.save().then( function () {
-			var win = ctx.open( '/decks/' + this._id + '.html', '_blank' );
-			if ( win ) win.focus();
-			else alert( 'Please allow popups for this site' );
+			switch ( how ) {
+				case 'html':
+					how = '/decks/' + this._id + '.html';
+					break;
+				case 'pdf':
+					how = '/api/deck/pdf/' + this._id;
+					break;
+				default:
+					how = null;
+			}
+			if ( how ) {
+				var win = ctx.open( how, '_blank' );
+				if ( win ) win.focus();
+				else alert( 'Please allow popups for this site' );
+			}
 		}.bind( this ) );
 	};
 
