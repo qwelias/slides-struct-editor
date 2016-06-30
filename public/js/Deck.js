@@ -5,7 +5,8 @@
 		if ( !( this instanceof Deck ) ) return new Deck( data );
 
 		if ( data && data.slides ) data.slides = data.slides.map( function ( s ) {
-			return ctx.Slide( s );
+			if ( typeOf( s ) !== 'Slide' ) return ctx.Slide( s );
+			else return s;
 		} );
 
 		ctx.SObject.call( this, data || Deck.default, Deck.modelname );
