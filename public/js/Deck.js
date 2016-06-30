@@ -4,15 +4,34 @@
 	function Deck( data ) {
 		if ( !( this instanceof Deck ) ) return new Deck( data );
 
-		this.activeSlideI = ko.observable( 0 );
-		this.defaultHeader = ko.observable( '' );
-		this.defaultFooter = ko.observable( '' );
-
 		if ( data && data.slides ) data.slides = data.slides.map( function ( s ) {
 			return ctx.Slide( s );
 		} );
 
 		ctx.SObject.call( this, data || Deck.default, Deck.modelname );
+
+		this.activeSlideI = ko.observable( 0 );
+
+		this.defaultHeader = ko.observable( '' );
+		this.defaultFooter = ko.observable( '' );
+
+		// auto-save start
+		// this.autoSave = ko.observable( true );
+		// this.isChanged = false;
+		//
+		// var setAutoSave = function setAutoSaveInterval( interval ) {
+		// 	return setInterval( function () {
+		// 		if ( this.isChanged ) this.save();
+		// 	}.bind( this ), interval );
+		// }.bind( this, 10 * 1000 );
+		//
+		// this.autoSaveInterval = setAutoSave();
+		//
+		// this.autoSave.subscribe( function ( newVal ) {
+		// 	if ( newVal ) this.autoSaveInterval = this.autoSaveInterval || setAutoSave();
+		// 	else clearInterval( this.autoSaveInterval );
+		// }.bind( this ) );
+		// auto-save end
 	};
 
 	Object.defineProperty( Deck, 'default', {
@@ -71,11 +90,11 @@
 
 	Deck.prototype.getContentsHTML = function getContentsHTML() {
 		var slides = this.data.slides();
-		return "<div class='deck-contents'><div>" +
+		return "<div class='deck-contents'>" +
 			slides.map( function ( s ) {
-				return s.getContentsHTML();
-			} ).join( "</div><div>" ) +
-			"</div></div>";
+				return s.getContentsHTML() || '';
+			} ).join( "" ) +
+			"</div>";
 	};
 
 	Deck.prototype.getFooter = function getFooter( j ) {
@@ -123,6 +142,7 @@
 			}
 		}.bind( this ) );
 		return ctx.SObject.prototype.save.call( this ).then( function () {
+			this.isChanged = false;
 			console.log( 'saved' );
 		}.bind( this ) ).catch( function ( e ) {
 			console.log( e.stack || e );

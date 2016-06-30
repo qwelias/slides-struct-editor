@@ -6,8 +6,9 @@
 
 		this.activeFragment = ko.observable();
 
-		if(data && data.fragments) data.fragments = data.fragments.map( function ( f ) {
-			return ctx.Fragment( f );
+		if ( data && data.fragments ) data.fragments = data.fragments.map( function ( f ) {
+			if ( ctx.typeOf( f ) !== 'Fragment' ) return ctx.Fragment( f );
+			else return f;
 		} );
 
 		SObject.call( this, data || Slide.default );
@@ -67,15 +68,16 @@
 	};
 
 	Slide.prototype.getContentsHTML = function getContentsHTML() {
+		if ( !this.data.header.enabled() ) return;
 		var title = "<span>" + this.data.title() + "</span>";
 		var fragments = this.data.fragments().map( function ( f ) {
 			return f.getContentsHTML();
 		} ).join( '' );
-		return title + (
+		return "<div>" + title + (
 			fragments ?
-			"<ul>" + fragments + "</ul>" :
+			"<div>" + fragments + "</div>" :
 			""
-		)
+		) + "</div>";
 	};
 
 	Slide.prototype.setLayout = function setLayout( name ) {

@@ -41,7 +41,7 @@
 
 	Fragment.prototype.getContentsHTML = function getContentsHTML() {
 		var title = this.data.title() || this.data.content.generate.document();
-		if( title ) return "<li>" + title + "</li>";
+		if ( title ) return "<div>" + title + "</div>";
 		return '';
 	};
 
