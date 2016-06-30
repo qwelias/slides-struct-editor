@@ -40,6 +40,7 @@ label.slide-menu-trigger {
     z-index: 20;
     position: fixed;
     background-color: rgba(0,0,0,0.3);
+    overflow-y: auto;
 
     > .popup-window {
         margin: 5em auto;

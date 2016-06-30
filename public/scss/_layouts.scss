@@ -279,3 +279,31 @@
         }
     }
 }
+
+.deck-contents {
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+
+    -js-display: flex;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    > div {
+        padding-left: 1em;
+        padding-bottom: 1.5em;
+        flex-basis: auto;
+
+        > span {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        > div {
+            padding-top: 0.3em;
+            padding-left: 1em;
+        }
+    }
+}
