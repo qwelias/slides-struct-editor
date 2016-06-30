@@ -155,8 +155,7 @@
                         </label>
                         <label>
                             <input type="checkbox"
-                            data-bind="checked: slide.data.useLocalAS">
-                            Авто-пролистывание
+                                data-bind="checked: slide.data.useLocalAS"> Авто-пролистывание
                             <input type="number"
                                 min="0"
                                 data-bind="
@@ -280,12 +279,17 @@
                             data-bind="value: data.content.img">
                     </label>
                     <label>
-                        <div>Текст (HTML)</div>
+                        <div>
+                            Текст (HTML)
+                        </div>
                         <textarea type="text"
-                            rows="3"
+                            rows="5"
                             data-bind="value: data.content.html">
                         </textarea>
                     </label>
+                    <button data-bind="click: function(){
+                       data.content.html(_vm.deck().getContentsHTML());
+                   }">Вставить содержание презентации</button>
                     <!-- <label>
                         <div>MarkDown</div>
                         <textarea type="text" rows="3"

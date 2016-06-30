@@ -91,11 +91,13 @@
 
 	Deck.prototype.getContentsHTML = function getContentsHTML() {
 		var slides = this.data.slides();
-		return "<div class='deck-contents'>" +
+		return "<div class='deck-contents'>\n" +
 			slides.map( function ( s ) {
 				return s.getContentsHTML() || '';
-			} ).join( "" ) +
-			"</div>";
+			} ).filter( function ( v ) {
+				return v
+			} ).join( "\n" ) +
+			"\n</div>";
 	};
 
 	Deck.prototype.getFooter = function getFooter( j ) {

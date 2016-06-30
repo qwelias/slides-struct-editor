@@ -72,12 +72,14 @@
 		var title = "<span>" + this.data.title() + "</span>";
 		var fragments = this.data.fragments().map( function ( f ) {
 			return f.getContentsHTML();
-		} ).join( '' );
-		return "<div>" + title + (
+		} ).filter( function ( v ) {
+			return v
+		} ).join( '\n' );
+		return "<div>\n" + title + (
 			fragments ?
-			"<div>" + fragments + "</div>" :
+			"\n<div>\n" + fragments + "\n</div>" :
 			""
-		) + "</div>";
+		) + "\n</div>";
 	};
 
 	Slide.prototype.setLayout = function setLayout( name ) {
