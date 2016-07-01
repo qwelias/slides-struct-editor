@@ -13,19 +13,21 @@
 
         </script>
         <link rel="stylesheet"
-            href="css/fa.css">
+            href="css/lib/fa.css">
+        <link rel="stylesheet"
+            href="css/lib/anime.css">
         <link rel="stylesheet"
             href="css/editor.css">
         <!--[if IE]>
-            <script src="lib/flexibility.js"></script>
+            <script src="js/lib/flexibility.js"></script>
         <![endif]-->
-        <script src="lib/promise.js"></script>
-        <script src="lib/jq.js"></script>
-        <script src="lib/jq-ajax-promise.js"></script>
-        <script src="lib/ko.js"></script>
-        <script src="lib/ko-ext.js"></script>
-        <script src="lib/server.js"></script>
-        <script src="lib/SObject.js"></script>
+        <script src="js/lib/promise.js"></script>
+        <script src="js/lib/jq.js"></script>
+        <script src="js/lib/jq-ajax-promise.js"></script>
+        <script src="js/lib/ko.js"></script>
+        <script src="js/lib/ko-ext.js"></script>
+        <script src="js/lib/server.js"></script>
+        <script src="js/lib/SObject.js"></script>
     </head>
 
     <body>
@@ -33,14 +35,19 @@
             class="deck">
             <!-- ko alias: 'deck' -->
             <div class="deck-head">
-                <input type="text"
-                    placeholder="название презентации"
-                    data-bind="value: deck.data.title">
-                <span>
-                    <button data-bind="click: deck.open.bind( deck, null )">Сохранить</button> |
-                    <button data-bind="click: deck.open.bind( deck, 'html' )">WEB</button> |
-                    <button data-bind="click: deck.open.bind( deck, 'pdf' )">PDF</button>
-                </span>
+                <div>
+                    <input type="text"
+                        placeholder="название презентации"
+                        data-bind="value: deck.data.title">
+                </div>
+                <div>
+                    <div id="save-icon" style="opacity: 0"><i class="fa fa-floppy-o" aria-hidden="true"></i></div>
+                    <div>
+                        <button data-bind="click: deck.open.bind( deck, null )">Сохранить</button> |
+                        <button data-bind="click: deck.open.bind( deck, 'html' )">WEB</button> |
+                        <button data-bind="click: deck.open.bind( deck, 'pdf' )">PDF</button>
+                    </div>
+                </div>
             </div>
             <div class="config-bar"
                 data-bind="with: deck.data.reveal">
@@ -246,33 +253,39 @@
                         <input type="text"
                             data-bind="value: data.title">
                     </label> -->
-                    <label>
-                        <div>
-                            Документ
-                        </div>
-                        <input type="text"
-                            data-bind="value: data.content.generate.document">
+                    <input type="checkbox" class="trigger" id="config-generate-trigger">
+                    <label for="config-generate-trigger">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i> Сгенерировать
                     </label>
-                    <label>
-                        <div>Год</div>
-                        <input type="text"
-                            data-bind="value: data.content.generate.year">
-                    </label>
-                    <label>
-                        <div>Период</div>
-                        <input type="text"
-                            data-bind="value: data.content.generate.period">
-                    </label>
-                    <label>
-                        <div>Отчёт</div>
-                        <input type="text"
-                            data-bind="value: data.content.generate.report">
-                    </label>
-                    <label>
-                        <div>Режим</div>
-                        <input type="text"
-                            data-bind="value: data.content.generate.mode">
-                    </label>
+                    <div id="config-generate">
+                        <label>
+                            <div>
+                                Документ
+                            </div>
+                            <input type="text"
+                                data-bind="value: data.content.generate.document">
+                        </label>
+                        <label>
+                            <div>Год</div>
+                            <input type="text"
+                                data-bind="value: data.content.generate.year">
+                        </label>
+                        <label>
+                            <div>Период</div>
+                            <input type="text"
+                                data-bind="value: data.content.generate.period">
+                        </label>
+                        <label>
+                            <div>Отчёт</div>
+                            <input type="text"
+                                data-bind="value: data.content.generate.report">
+                        </label>
+                        <label>
+                            <div>Режим</div>
+                            <input type="text"
+                                data-bind="value: data.content.generate.mode">
+                        </label>
+                    </div>
                     <label>
                         <div>Изображение</div>
                         <input type="text"
@@ -283,7 +296,7 @@
                             Текст (HTML)
                         </div>
                         <textarea type="text"
-                            rows="5"
+                            rows="12"
                             data-bind="value: data.content.html">
                         </textarea>
                     </label>

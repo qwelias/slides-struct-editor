@@ -8,19 +8,43 @@
 }
 
 .deck-head {
-    > input[type="text"] {
-        width: 80%;
-        max-width: calc(100% - 5em);
-        font-size: 2em;
-    }
+    -js-display: flex;
+    display: flex;
+    justify-content: space-between;
 
-    > span {
-        float: right;
-        border: solid 1px $bGreyColor;
-        border-radius: 0.3em;
+    > div {
+        flex-basis: auto;
 
-        > button {
-            border: none;
+        > input[type="text"] {
+            width: 100%;
+            max-width: calc(100% - 5em);
+            font-size: 2em;
+        }
+
+        > div {
+            display: inline-block;
+            vertical-align: middle;
+
+            > button {
+                border: none;
+            }
+
+            > i {
+                font-size: 2em;
+            }
+
+            &:last-child {
+                border: solid 1px $bGreyColor;
+                border-radius: 0.3em;
+            }
+
+            + div {
+                margin-left: 1em;
+            }
+        }
+
+        &:first-child {
+            width: 80%;
         }
     }
 }
@@ -29,18 +53,22 @@
     > * {
         padding: 0.2em 0.5em;
         border-right: solid 1px $bGreyColor;
-        vertical-align: bottom;
+        vertical-align: middle;
 
         &:last-child {
             border: none;
         }
 
-        > input[type="number"] {
-            width: 3em;
-        }
+        > input {
+            vertical-align: inherit;
 
-        > input[type="text"] {
-            width: 16em;
+            &[type="number"] {
+                width: 3em;
+            }
+
+            &[type="text"] {
+                width: 18em;
+            }
         }
     }
 }
@@ -204,9 +232,17 @@
 }
 
 #fragment-config .popup-content {
-    > label {
+    label {
         display: block;
         padding: 0.5em 0;
+
+        &[for="config-generate-trigger"] {
+            cursor: pointer;
+
+            > i {
+                transition: 200ms ease-in-out;
+            }
+        }
 
         > input {
             text-align: left;
@@ -218,4 +254,23 @@
             resize: vertical;
         }
     }
+}
+
+#config-generate {
+    max-height: 0;
+    padding-left: 1em;
+    transition: 200ms ease-in-out;
+    overflow: hidden;
+}
+
+#config-generate-trigger:checked ~ #config-generate {
+    max-height: 20em;
+}
+
+#config-generate-trigger:checked + label > i {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

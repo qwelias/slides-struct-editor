@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "buildScss": "node_modules/.bin/node-sass -r public/scss/ --output-style compressed -o public/css/",
-    "watchScss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/",
-    "watchCss": "node_modules/.bin/postcss -w -u autoprefixer --autoprefixer.browsers \"Chrome > 20\" -r public/css/*.css"
+    "buildscss": "node_modules/.bin/node-sass -r public/scss/ --output-style compressed -o public/css/",
+    "watchscss": "node_modules/.bin/node-sass -wr public/scss/ --output-style compressed -o public/css/",
+    "watchcss": "node_modules/.bin/postcss -w -u autoprefixer --autoprefixer.browsers \"Chrome > 20\" public/css/*.css -d public/css/"
   },
   "repository": {
     "type": "git",

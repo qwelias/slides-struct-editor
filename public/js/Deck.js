@@ -138,17 +138,33 @@
 	};
 
 	Deck.prototype.save = function save() {
+		var start = Date.now();
+
+		var interval = null;
+		var saveicon = ctx.$( '#save-icon' );
+		if ( saveicon ) {
+			saveicon.addClass( "animated fadeOut" );
+			interval = setInterval( function () {
+				saveicon.removeClass( "animated fadeOut" );
+				saveicon.addClass( "animated fadeOut" );
+			}, 1000 );
+		};
+
 		var slides = this.data.slides();
 		slides.map( function ( s, i ) {
 			if ( s.data.footer.enabled() ) {
 				s.data.footer.text()[ 1 ] = this.getFooter( i );
 			}
 		}.bind( this ) );
+
 		return ctx.SObject.prototype.save.call( this ).then( function () {
 			this.isChanged = false;
-			console.log( 'saved' );
-		}.bind( this ) ).catch( function ( e ) {
-			console.log( e.stack || e );
+		}.bind( this ) ).catch( alert.bind( null ) ).then( function () {
+			var diff = Date.now() - start;
+			setTimeout( function () {
+				saveicon.removeClass( "animated fadeOut" );
+				clearInterval( interval );
+			}, diff < 1000 ? 1000 - diff : 0 );
 		} );
 	};
 

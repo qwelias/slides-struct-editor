@@ -2,36 +2,6 @@ input[type="checkbox"].trigger {
     display: none;
 }
 
-#slide-menu {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 30em;
-    max-width: 100%;
-    left: -30em;
-    z-index: 100;
-    transition: 0.5s ease-in-out;
-    transition-property: left, right, box-shadow;
-    background-color: inherit;
-    padding: 1em;
-
-    > label.slide-menu-trigger {
-        float: right;
-    }
-}
-
-label.slide-menu-trigger {
-    font-size: 3em;
-    padding: 0.3em 0.4em;
-    line-height: 0;
-    cursor: pointer;
-}
-
-#slide-menu-trigger:checked + #slide-menu {
-    left: 0;
-    box-shadow: 0 0 1.5em 0.01em grey;
-}
-
 .popup {
     top: 0;
     bottom: 0;
@@ -62,6 +32,7 @@ label.slide-menu-trigger {
         }
 
         > .popup-content {
+            background-color: white;
             width: 100%;
         }
     }
